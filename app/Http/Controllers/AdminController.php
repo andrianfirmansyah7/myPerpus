@@ -10,6 +10,7 @@ use Hash;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -20,9 +21,11 @@ class AdminController extends Controller
 
     public function getId(){
         $a = auth()->user()->id;
-        $data = DB::table('karyawans')->select('*')->where('id_akun',$a)->get();
-
-        return $data;
+        $data = DB::table('karyawans')->select('id')->where('id_akun',$a)->get();
+        foreach($data as $dt){
+            $id = $dt->id;
+        }
+        return $id;
     }
 
     public function index()
@@ -38,11 +41,18 @@ class AdminController extends Controller
         return view('admin/employee',compact('data','dati','id'));
     }
 
-    public function libraryStatistic(){
+    public function target(){
         $id = $this->getId();
         $data = Karyawans::all();
         $dati = User::all();
-        return view('admin/statistic',compact('data','dati','id'));
+        return view('admin/target',compact('data','dati','id'));
+    }
+
+    public function historyTarget(){
+        $id = $this->getId();
+        $data = Karyawans::all();
+        $dati = User::all();
+        return view('admin/historyTarget',compact('data','dati','id'));
     }
 
     public function profile($id){
@@ -75,7 +85,9 @@ class AdminController extends Controller
     }
 
     public function member(){
-        return view('admin/member');
+        $id = $this->getId();
+        $data = Member::all();
+        return view('admin/member',compact('id'));
     }
 
     public function membership(){
@@ -86,7 +98,7 @@ class AdminController extends Controller
     $id = $this->getId();
     $kr = Karyawans::find($id);
     $input = $request->all();
-    
+
     $kr->nama_karyawan = $input['nama_karyawan'];
     $kr->jenis_kelamin = $input['jenis_kelamin'];
     $kr->tanggal_lahir = $input['tanggal_lahir'];
@@ -106,7 +118,8 @@ class AdminController extends Controller
 
     if($ds->delete()){
         $dati->delete();
-    return redirect()->route('admin.employee',compact('id'))->with(['success' => 'Berhasil Diubah']);    
+        return redirect()->route('admin.employee',compact('id'));
+        Alert::success('Berhasil Dihapus', 'Karyawan Berhasil Dihapus');
     }
     }
 
@@ -157,8 +170,8 @@ class AdminController extends Controller
         $kr->save();
 
         return redirect()->route('admin.employee',compact('id'))->with(['success' => 'Berhasil Ditambahkan']);
-    } 
+    }
 
 
-    
+
 }

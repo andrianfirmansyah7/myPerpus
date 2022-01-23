@@ -27,36 +27,36 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="post" action="{{ route('librarian.addBook') }}">
+            <form method="post" action="{{ route('librarian.addBook') }}" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">Kode ISBN</label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Karyawan" name="isbn" required>
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Kode ISBN" name="isbn" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Nama Buku
                   </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="nama_buku" required>
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Buku" name="nama_buku" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Penulis
                   </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="penulis" required>
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Penulis" name="penulis" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Penerbit
                   </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="penerbit" required>
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Penerbit" name="penerbit" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Tahun Terbit
                   </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="tahun_terbit" required>
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Tahun Terbit" name="tahun_terbit" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
@@ -68,7 +68,13 @@
                   <label for="exampleInputBorderWidth2">
                     Jumlah Halaman
                   </label>
-                  <input type="number" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="jumlah_halaman" required>
+                  <input type="number" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Jumlah Halaman" name="jumlah_halaman" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputBorderWidth2">
+                    Stok
+                  </label>
+                  <input type="number" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Stok" name="stok" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleSelectBorder">Genre</label>
@@ -76,6 +82,18 @@
                     <option value="pengetahuan">Pengetahuan</option>
                     <option value="romance">Romance</option>
                   </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputBorderWidth2">
+                    Cover Buku
+                  </label>
+                  <input type="file" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="cover_buku" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputBorderWidth2">
+                    File PDF Buku
+                  </label>
+                  <input type="file" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="pdf_buku" required>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
@@ -117,7 +135,7 @@
                   <?php $a = 1 ?>
                   @forelse ($data as $dt)
                   <tr>
-                    <td>#</td>
+                    <td>{{ $a++ }}</td>
                     <td><a href="#" data-toggle="modal" data-target="#modal-detail{{ $dt->id }}">{{ $dt->id }}</a></td>
                     <td>{{ $dt->nama_buku }}</td>
                     <td>{{ $dt->penulis }}</td>
@@ -147,31 +165,37 @@
                   <label for="exampleInputBorderWidth2">
                     Penulis
                   </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="penuls" value="{{ $dt->penulis }}">
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="penulis" name="penulis" value="{{ $dt->penulis }}">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Penerbit
                   </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="email" value="{{ $dt->penerbit }}">
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="penerbit" value="{{ $dt->penerbit }}">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Tahun Terbit
                   </label>
-                  <input type="date" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="tanggal_lahir" value="{{ $dt->tahun_terbit }}">
+                  <input type="number" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="tahun_terbit" value="{{ $dt->tahun_terbit }}">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Ikhtisar
                   </label>
-                  <textarea class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" row="3" style="resize:none">{{ $dt->ikhtisar }}</textarea>
+                  <textarea class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" row="3" style="resize:none" name="ikhtisar">{{ $dt->ikhtisar }}</textarea>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Jumlah Halaman
                   </label>
-                  <input type="number" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="jumlah_halaman" value="{{ $dt->jumlah_halaman }}" required>
+                  <input type="number" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Jumlah Halaman" name="jumlah_halaman" value="{{ $dt->jumlah_halaman }}" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputBorderWidth2">
+                    Stok
+                  </label>
+                  <input type="number" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Stok" name="stok" value="{{ $dt->stok }}" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleSelectBorder">Genre</label>
@@ -180,6 +204,19 @@
                     <option value="romance">Romance</option>
                   </select>
                 </div>
+                <div class="form-group">
+                  <label for="exampleInputBorderWidth2">
+                    Cover Buku
+                  </label>
+                  <input type="file" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="cover_buku">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputBorderWidth2">
+                    File PDF Buku
+                  </label>
+                  <input type="file" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="pdf_buku">
+                </div>
+
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
@@ -202,6 +239,11 @@
               </button>
             </div>
             <div class="modal-body">
+                <div class="form-group">
+                  <center>
+                  <img src="/buku/cover/{{ $dt->cover_buku }}" alt="">
+                  </center>
+                </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">Nama Buku</label>
                   <p>{{ $dt->nama_buku }}</p>
@@ -230,7 +272,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleSelectBorder">Genre</label>
-                  <p>{{ $dt->Genre }}</p>
+                  <p>{{ ucfirst($dt->genre) }}</p>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

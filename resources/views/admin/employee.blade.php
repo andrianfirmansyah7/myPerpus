@@ -112,7 +112,7 @@
                   <?php $a = 1 ?>
                   @forelse ($data as $dt)
                   @foreach ($dati as $di)
-                  <?php 
+                  <?php
                   if($di->id == $dt->id_akun){
                   $email = $di->email;
                   }
@@ -131,7 +131,7 @@
                     </td>
                     <td>
                       <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit{{$dt->id}}"><i class="fas fa-pen"></i> Ubah</a>
-                      @if($dt->jabatan != "admin") 
+                      @if($dt->jabatan != "admin")
                       <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus{{$dt->id}}"><i class="fas fa-trash"></i> Hapus</a>
                       @endif
                     </td>
@@ -292,8 +292,8 @@
         <!-- /.row -->
       </div>
       <!-- /.container-fluid -->
-    </section>  
+    </section>
   </div>
 
 
-@endsection  
+@endsection

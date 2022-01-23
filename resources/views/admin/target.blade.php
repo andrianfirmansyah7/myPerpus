@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Manajemen Karyawan</h1>
+            <h1 class="m-0">Target Perpustakaan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Manajemen Karyawan</li>
+              <li class="breadcrumb-item active">Target Perpustakaan</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -22,7 +22,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Tambah Karyawan</h4>
+              <h4 class="modal-title">Tambah Target</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -31,43 +31,30 @@
             @csrf
             <div class="modal-body">
                 <div class="form-group">
-                  <label for="exampleInputBorderWidth2">Nama Karyawan</label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Karyawan" name="nama_karyawan" required>
+                  <label for="exampleInputBorderWidth2">Nama Target</label>
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Target" name="nama_target" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
-                    No Telepon
+                    Tanggal Awal Target
                   </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="no_hp" required>
+                  <input type="date" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="awal" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
-                    Alamat Email
+                    Tanggal Akhir Target
                   </label>
-                  <input type="email" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="email" required>
-                </div>
-                <div class="form-group">
-                  <label for="exampleSelectBorder">Jenis Kelamin</label>
-                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="jenis_kelamin" required>
-                    <option value="laki-laki">Laki-Laki</option>
-                    <option value="perempuan">Perempuan</option>
-                  </select>
+                  <input type="date" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="akhir" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
-                    Tanggal Lahir
+                    Deskripsi
                   </label>
-                  <input type="date" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="tanggal_lahir" required>
+                  <textarea class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" row="3" style="resize:none" name="deskripsi" placeholder="Deskripsi Tugas"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    Alamat
-                  </label>
-                  <textarea class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" row="3" style="resize:none" name="alamat" required></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="exampleSelectBorder">Jabatan</label>
-                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="jabatan" required>
+                  <label for="exampleSelectBorder">Tujuan Target</label>
+                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="tujuan">
                     <option value="staff">Staff</option>
                     <option value="pustakawan">Pustakawan</option>
                     <option value="kurir">Kurir</option>
@@ -92,20 +79,19 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Data Karyawan Perpustakaan</h3>
+                <h3 class="card-title">Target Perpustakaan</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <a href="#" data-toggle="modal" data-target="#modal-lg" class="btn btn-primary" style="margin-bottom: 8px;margin-top: -5px;"><i class="fas fa-plus"></i> Tambah</a>
-                <a href="#" class="btn btn-success" style="margin-bottom: 8px;margin-top: -5px;"><i class="fas fa-table"></i> Cetak Excel</a>
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>NIK</th>
-                    <th>Nama Karyawan</th>
-                    <th>Jabatan</th>
-                    <th>Divisi</th>
-                    <th>Action</th>
+                    <th>No</th>
+                    <th>Nama Target</th>
+                    <th>Tanggal Awal</th>
+                    <th>Tanggal Akhir</th>
+                    <th>Status</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -137,50 +123,36 @@
                     </td>
                   </tr>
         <div class="modal fade" id="modal-edit{{$dt->id}}">
-        <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Ubah Karyawan</h4>
+              <h4 class="modal-title">Tambah Target</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="post" action="{{ route('admin.editEmployee',$dt->id) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.addEmployee') }}">
             @csrf
             <div class="modal-body">
                 <div class="form-group">
-                  <label for="exampleInputBorderWidth2">Nama Karyawan</label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Karyawan" name="nama_karyawan" value="{{ $dt->nama_karyawan }}">
+                  <label for="exampleInputBorderWidth2">Nama Target</label>
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Target" name="nama_target" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
-                    No Telepon
+                    Tanggal Awal Target
                   </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="no_hp" value="{{ $dt->no_hp }}">
+                  <input type="date" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="awal" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
-                    Tanggal Lahir
+                    Tanggal Akhir Target
                   </label>
-                  <input type="date" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="tanggal_lahir" value="{{ $dt->tanggal_lahir }}">
+                  <input type="date" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="akhir" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleSelectBorder">Jenis Kelamin</label>
-                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="jenis_kelamin">
-                    <option value="laki-laki">Laki-Laki</option>
-                    <option value="perempuan">Perempuan</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    Alamat
-                  </label>
-                  <textarea class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" row="3" style="resize:none" name="alamat">{{ $dt->alamat }}</textarea>
-                </div>
-
-                <div class="form-group">
-                  <label for="exampleSelectBorder">Jabatan</label>
-                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="jabatan">
+                  <label for="exampleSelectBorder">Tujuan Target</label>
+                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="tujuan">
                     <option value="staff">Staff</option>
                     <option value="pustakawan">Pustakawan</option>
                     <option value="kurir">Kurir</option>
@@ -189,13 +161,11 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
-              <input type="submit" class="btn btn-primary" value="Ubah Karyawan">
+              <input type="submit" class="btn btn-primary" value="Tambah Karyawan">
             </div>
           </div>
-          <!-- /.modal-content -->
           </form>
         </div>
-        <!-- /.modal-dialog -->
       </div>
 
               <div class="modal fade" id="modal-detail{{$dt->id}}">

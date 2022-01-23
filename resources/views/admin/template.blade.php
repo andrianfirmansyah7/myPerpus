@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,8 +83,8 @@
   <div class="card-footer">
         @if (auth()->user()->role == "admin")
         <a href="/admin/profil/{{ $id }}" class="btn btn-primary btn-flat" style="float: left;"><i class="nav-icon fas fa-user"></i> Profile</a>
-        @else if (auth()->user()->role == "pustakawan")
-        <a href="/pustakawan/profil/{{ $id }}" class="btn btn-primary btn-flat" style="float: left;"><i class="nav-icon fas fa-user"></i> Profile</a>
+        @else
+        <a href="/librarian/profil/{{ $id }}" class="btn btn-primary btn-flat" style="float: left;"><i class="nav-icon fas fa-user"></i> Profile</a>
         @endif
         <form method="POST" action="{{ route('logout') }}">
         @csrf
@@ -91,6 +92,7 @@
           <i class="nav-icon fa fa-sign-out-alt"></i>
             Logout
         </button>
+      </form>
   </div>
 </div>
         </div>
@@ -157,13 +159,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/book" class="nav-link">
+                <a href="/librarian/book" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manajemen Buku</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/" class="nav-link">
+                <a href="/librarian/donation" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manajemen Sumbangan Buku</p>
                 </a>
@@ -174,7 +176,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Pengunjung
+                Anggota Perpustakaan
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -183,12 +185,6 @@
                 <a href="/librarian/addNewMember" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrasi Anggota Baru</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/librarian/membership" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Konfirmasi Anggota Baru</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -209,15 +205,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('librarian.borrow') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Peminjaman Buku</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="/librarian/back" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Pengembalian Buku</p>
+                  <p>Peminjaman Buku (Online)</p>
                 </a>
               </li>
             </ul>
@@ -247,50 +237,8 @@
                   <p>Presensi Karyawan</p>
                 </a>
               </li>
-            </ul>            
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-bar"></i>
-              <p>
-                Statistik
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="admin/libraryStatistic" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Statistik Perpustakaan</p>
-                </a>
-              </li>
-            </ul>         
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-bullseye"></i>
-              <p>
-                Target
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/target" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manajemen Target</p>
-                </a>
-              </li>
             </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/historyTarget" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Riwayat Target yang Dibuat</p>
-                </a>
-              </li>
-            </ul>            
-          </li>           
+          </li>
           @endif
           <li class="nav-item">
           </li>

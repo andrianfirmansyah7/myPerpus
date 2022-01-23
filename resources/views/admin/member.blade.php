@@ -17,75 +17,6 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-
-      <div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Tambah Member</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form method="post" action="{{ route('librarian.addMember') }}">
-            @csrf
-            <div class="modal-body">
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">Nama Member</label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Karyawan" name="nama_member">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    No Telepon
-                  </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="no_hp">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    Alamat Email
-                  </label>
-                  <input type="email" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="email">
-                </div>
-                <div class="form-group">
-                  <label for="exampleSelectBorder">Jenis Kelamin</label>
-                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="jenis_kelamin">
-                    <option value="laki-laki">Laki-Laki</option>
-                    <option value="perempuan">Perempuan</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    Tanggal Lahir
-                  </label>
-                  <input type="date" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="tanggal_lahir">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    Alamat
-                  </label>
-                  <textarea class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" row="3" style="resize:none" name="alamat"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="exampleSelectBorder">Jenis Membership</label>
-                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="jenis_membership">
-                    <option value="basic">Basic</option>
-                    <option value="silver">Silver</option>
-                    <option value="gold">Gold</option>
-                  </select>
-                </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
-              <input type="submit" class="btn btn-primary" value="Tambah Karyawan">
-            </div>
-          </div>
-          <!-- /.modal-content -->
-          </form>
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-
-        <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -96,14 +27,13 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <a href="#" data-toggle="modal" data-target="#modal-lg" class="btn btn-primary" style="margin-bottom: 8px;margin-top: -5px;"><i class="fas fa-plus"></i> Tambah</a>
                 <a href="#" class="btn btn-success" style="margin-bottom: 8px;margin-top: -5px;"><i class="fas fa-table"></i> Cetak Excel</a>
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>ID</th>
                     <th>Nama Member</th>
-                    <th>Jenis membership</th>
+                    <th>Jenis Membership</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -111,12 +41,19 @@
                   <?php $a = 1 ?>
                   @forelse ($data as $dt)
                   @foreach ($dati as $di)
-                  <?php $email = $di->email ?>
+                  <?php 
+                  if($dt->id_akun == $di->id){
+                  $email = $di->email;  
+                  }
+                  else{
+                  $email = "";
+                  }
+                  ?>
                   @endforeach
                   <tr>
                     <td><a href="#" data-toggle="modal" data-target="#modal-detail{{ $dt->id }}">{{ $dt->id }}</a></td>
                     <td>{{ $dt->nama_member }}</td>
-                    <td>{{ $dt->jenis_membership }}</td>
+                    <td>{{ ucfirst($dt->jenis_membership) }}</td>
                     <td>
                       <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit{{$dt->id}}"><i class="fas fa-pen"></i> Ubah</a> 
                       <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus{{$dt->id}}"><i class="fas fa-trash"></i> Hapus</a>
@@ -175,7 +112,7 @@
         <!-- /.modal-dialog -->
       </div>
 
-              <div class="modal fade" id="modal-detail{{$dt->id}}">
+      <div class="modal fade" id="modal-detail{{$dt->id}}">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -219,7 +156,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleSelectBorder">Jenis Membership</label>
-                  <p>{{ $dt->jenis_Membership }}</p>
+                  <p>{{ $dt->jenis_membership }}</p>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

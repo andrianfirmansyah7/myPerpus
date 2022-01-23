@@ -31,19 +31,19 @@
             <div class="modal-body">
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">Nama Member</label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Karyawan" name="nama_member">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    No Telepon
-                  </label>
-                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="no_hp">
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nama Member" name="nama_member">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputBorderWidth2">
                     Alamat Email
                   </label>
                   <input type="email" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Email" name="email">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputBorderWidth2">
+                    No Telepon
+                  </label>
+                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Nomer Telepon" name="no_hp">
                 </div>
                 <div class="form-group">
                   <label for="exampleSelectBorder">Jenis Kelamin</label>
@@ -72,7 +72,7 @@
                     <option value="gold">Gold</option>
                   </select>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Tambah Karyawan">
+                <input type="submit" class="btn btn-primary" value="Tambah Member">
 
               </div>
             </form>
