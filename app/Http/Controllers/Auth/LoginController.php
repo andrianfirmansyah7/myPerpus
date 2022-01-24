@@ -7,6 +7,10 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\Karyawans;
+use App\Models\User;
+use App\Models\Member;
+use Hash;
+
 
 class LoginController extends Controller
 {
@@ -41,16 +45,16 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {   
+    {
         $input = $request->all();
-   
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-   
+
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {   
+        {
             if (auth()->user()->role == "admin"){
                 return redirect()->route('admin.home');
             }else if(auth()->user()->role == "pustakawan"){
@@ -61,7 +65,7 @@ class LoginController extends Controller
         }else{
             return redirect()->route('home')
                 ->with('error','Email Address And Password Are Wrong.');
-        }   
+        }
     }
 
     public function logout(Request $request) {
@@ -69,10 +73,43 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
+    public function register(Request $request){
+      $u = new User;
+      $kr = new Member;
+      $input = $request->all();
 
-    public function changePassword(Request $request, $id){
-        $input = $request->all();
+      $data = Member::all();
+      $count = $data->count();
 
+      $cariId = User::all()->last();
+      foreach($cariId as $cr){
+          $ids = $cariId->id;
+      }
 
+      $id = $ids+1;
+      $a = 1;
+      $c = rand(1000000,9999900);
+      $d = $count+1;
+
+      $nik = $a+$c+$d;
+
+      $u->name = $input['nama_member'];
+      $u->email = $input['email'];
+      $u->password = Hash::make($nik);
+      $u->role = 'member';
+      $u->save();
+
+      $kr->id = $nik;
+      $kr->nama_member = $input['nama_member'];
+      $kr->jenis_kelamin = "-";
+      $kr->tanggal_lahir = "-";
+      $kr->alamat = "-";
+      $kr->no_hp = $input['no_hp'];;
+      $kr->id_akun = $id;
+      $kr->jenis_membership = "Basic";
+      $kr->foto = "image.png";
+      $kr->status_akun = "Aktif";
+      $kr->save();
+      return redirect()->route('home');
     }
 }

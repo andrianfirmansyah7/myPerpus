@@ -68,7 +68,6 @@ body{
     width: 30%;
     margin: 1.5rem 0;
     background-color: #666666;
-
 }
 
 .regis-form-container form p{
@@ -99,10 +98,11 @@ body{
   <div class="main">
         <div class="card">
             <div class="regis-form-container">
-                <form action="">
+                <form action="/member/addRegister" method="post">
                     <h3>Sign Up</h3>
+                    @csrf
                     <span>Name</span>
-                    <input type="name" name="nama" class="box" placeholder="enter your name" id="">
+                    <input type="name" name="nama_member" class="box" placeholder="enter your name" id="">
                     <span>Email</span>
                     <input type="email" name="email" class="box" placeholder="enter your email" id="">
                     <span>Phone Number</span>
@@ -110,7 +110,7 @@ body{
                     <span>Password</span>
                     <input type="password" name="password" class="box" placeholder="enter your password" id="">
                     <span>Confirm Password</span>
-                    <input type="confirm_password" name="konfir" class="box" placeholder="enter your confirm password" id="">
+                    <input type="password" name="konfir" class="box" placeholder="enter your confirm password" id="">
                     <input type="submit" value="Sign Up" class="btn">
                     <p>Already have an account ? <a href="#">Sign In</a></p>
                 </form>

@@ -26,8 +26,8 @@
         <div class="icons">
           @if (!isset(auth()->user()->role))
             <div id="search-btn" class="fas fa-search"></div>
-            <div id="login-btn" class="fas"> Login</div>
-            <div class="fas"><a href="/newRegister">Register</a></div>
+            <div id="login-btn" class="fas"><a href="#">Login</a></div>
+            <div class="fas"><a href="/member/register">Register</a></div>
           @else
             <a href="#" class="fas">myBooks</a>
             <a href="#" class="fas">profile</a>
