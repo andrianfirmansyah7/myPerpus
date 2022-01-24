@@ -14,7 +14,7 @@
     <title>MyPerpus</title>
 </head>
 <body>
-    
+
 <!-- header section starts  -->
 
 <header class="header">
@@ -24,21 +24,26 @@
         <a href="#" class="logo"> <i class="fas fa-book"></i> MyPerpus </a>
 
         <div class="icons">
+          @if(!isset(auth()->user()->role))
             <div id="search-btn" class="fas fa-search"></div>
-            <a href="#" class="fas fa-heart"></a>
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <div id="login-btn" class="fas fa-user"></div>
+            <div id="login-btn" class="fas"><a href="#">Login</a></div>
+            <div class="fas"><a href="/member/register">Register</a></div>
+          @endif
+          @if(isset(auth()->user()->role))
+            <a href="/member/borrowBook">myBooks</a>
+            <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-danger btn-flat" style="float: right;">
+              <i class="nav-icon fa fa-sign-out-alt"></i>
+                Logout
+            </button>
+          </form>
+          @endif
         </div>
 
+
     </div>
 
-    <div class="header-2">
-        <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#featured">New Arrivals</a>
-            <a href="#arrivals">Books</a>
-        </nav>
-    </div>
 
 </header>
 
@@ -74,7 +79,7 @@
         @forelse($data as $dt)
         <div class="container" width="75%">
                   <center>
-        <div class="form-group">    
+        <div class="form-group">
                   <img src="/buku/cover/{{ $dt->cover_buku }}" alt="">
                 </div>
                 <div class="form-group">
@@ -136,7 +141,7 @@
   </div>
 </div>
         @empty
-        Kosong        
+        Kosong
         @endforelse
 </div>
 
@@ -173,7 +178,7 @@
             <a href="#"> <i class="fas fa-phone"></i> +621-529-2391 </a>
             <a href="#"> <i class="fas fa-envelope"></i> myPerpus@gmail.com </a>
         </div>
-        
+
     </div>
 
     <div class="share">

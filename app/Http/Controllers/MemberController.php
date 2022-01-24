@@ -47,9 +47,8 @@ class MemberController extends Controller
 
 
     public function borrowBook(){
-        /*$id = auth()->user()->id;*/
-        $id = 356;
-        $data = DB::table('peminjamans')->select('*')->where('peminjam',$id)->get();
+        $id = auth()->user()->id;
+        $data = DB::select("SELECT peminjamans.peminjam, peminjamans.buku, peminjamans.status, books.nama_buku, peminjamans.awal_peminjaman, peminjamans.akhir_peminjaman from peminjamans LEFT JOIN books on peminjamans.buku = books.id");
         return view('borrow',compact('data'));
     }
 

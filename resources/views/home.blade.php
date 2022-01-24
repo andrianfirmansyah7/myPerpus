@@ -24,13 +24,20 @@
         <a href="#" class="logo"> <i class="fas fa-book"></i> MyPerpus </a>
 
         <div class="icons">
-          @if (!isset(auth()->user()->role))
+          @if(!isset(auth()->user()->role))
             <div id="search-btn" class="fas fa-search"></div>
             <div id="login-btn" class="fas"><a href="#">Login</a></div>
             <div class="fas"><a href="/member/register">Register</a></div>
-          @else
-            <a href="#" class="fas">myBooks</a>
-            <a href="#" class="fas">profile</a>
+          @endif
+          @if(isset(auth()->user()->role))
+            <a href="/member/borrowBook">myBooks</a>
+            <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-danger btn-flat" style="float: right;">
+              <i class="nav-icon fa fa-sign-out-alt"></i>
+                Logout
+            </button>
+          </form>
           @endif
         </div>
 

@@ -59,7 +59,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.home');
             }else if(auth()->user()->role == "pustakawan"){
                 return redirect()->route('librarian.home');
-            }else{
+            }else if(auth()->user()->role == "member"){
                 return redirect()->route('home');
             }
         }else{
@@ -95,7 +95,7 @@ class LoginController extends Controller
 
       $u->name = $input['nama_member'];
       $u->email = $input['email'];
-      $u->password = Hash::make($nik);
+      $u->password = Hash::make($input['password']);
       $u->role = 'member';
       $u->save();
 
