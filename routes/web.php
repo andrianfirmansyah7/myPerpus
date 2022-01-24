@@ -59,3 +59,6 @@ Route::get('home/detailBook/{id}', [MemberController::class, 'getBook'])->name('
 Route::post('member/pinjamBuku', [MemberController::class, 'pinjamBuku'])->name('pinjam');
 Route::get('member/borrowBook', [MemberController::class, 'borrowBook'])->name('member.borrowBook');
 Route::get('member/readBook/{id}', [MemberController::class, 'readBook'])->name('readBook');
+Route::get('member/register',[MemberController::class, 'register'])->name('newRegister');
+Route::get('member/addRegister',[LoginController::class, 'register'])->name('addRegister');
+Route::get('member/profile',[MemberController::class, 'profile'])->name('memberProfile');

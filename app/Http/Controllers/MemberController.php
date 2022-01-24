@@ -58,4 +58,7 @@ class MemberController extends Controller
       return view('readBook',compact('data'));
     }
 
+    public function register(Request $req){
+      return view('register');
+    }
 }
