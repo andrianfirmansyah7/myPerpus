@@ -26,6 +26,7 @@
       <a href="#" class="logo"> <i class="fas fa-book"></i> MyPerpus </a>
 
       <div class="icons">
+
         <a href="#" class="fas">myBooks</a>
         <a href="#" class="fas">profile</a>
         <a href="#" class="fas">register</a>

@@ -24,8 +24,14 @@
         <a href="#" class="logo"> <i class="fas fa-book"></i> MyPerpus </a>
 
         <div class="icons">
+          @if (!isset(auth()->user()->role))
             <div id="search-btn" class="fas fa-search"></div>
-            <div id="login-btn" class="fas fa-user"> Login</div>
+            <div id="login-btn" class="fas"> Login</div>
+            <div class="fas"><a href="/newRegister">Register</a></div>
+          @else
+            <a href="#" class="fas">myBooks</a>
+            <a href="#" class="fas">profile</a>
+          @endif
         </div>
 
     </div>
@@ -82,42 +88,6 @@
 
 </section>
 
-<!-- home section ense  -->
-
-<!-- icons section starts  -->
-
-<section class="icons-container">
-
-    <div class="icons">
-        <i class="fas fa-shipping-fast"></i>
-        <div class="content">
-            <h3>Deliver from Nearest Store!</h3>
-            <p>with multiple services</p>
-        </div>
-    </div>
-
-    <div class="icons">
-        <i class="fas fa-redo-alt"></i>
-        <div class="content">
-            <h3>Easy returns</h3>
-            <p>delivery or check in options</p>
-        </div>
-    </div>
-
-    <div class="icons">
-        <i class="fas fa-headset"></i>
-        <div class="content">
-            <h3>24/7 support</h3>
-            <p>call us anytime</p>
-        </div>
-    </div>
-
-</section>
-
-<!-- icons section ends -->
-
-<!-- arrival section starts  -->
-
 <section class="featured" id="featured">
 
     <h1 class="heading"> <span>New Arrivals</span> </h1>
@@ -135,7 +105,9 @@
                     <h3></h3>
                     <div class="price">{{ $dt->nama_buku }}</div>
                     <div class="price">{{ $dt->penulis }}</div>
+                    @if (isset(auth()->user()->role))
                     <a href="/home/detailBook/{{ $dt->id }}" class="btn btn-primary">Pinjam</a>
+                    @endif
                 </div>
             </div>
             @empty
