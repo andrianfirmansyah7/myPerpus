@@ -36,7 +36,7 @@ class LibrarianController extends Controller
     public function back()
     {
         $id = $this->getId();
-        $data = Peminjamans::all();
+        $data = DB::table('peminjamans')->select("*")->where('status','=','Belum ACC')->get();
         return view('admin/back',compact('data','id'));
     }
 
@@ -200,20 +200,20 @@ class LibrarianController extends Controller
         return view('admin/book', compact('data','id'));
     }
 
-    public function terima($id){
+    public function accept($ids){
       $id = $this->getId();
-      $data = Peminjamans::find($id);
-      $data->status = "Diterima";
-      $data->save();
-      return view('admin/back', compact('data','id'));
+      DB::table('peminjamans')->where('id',$ids)->update([
+          'status'=>"Diterima",
+      ]);
+      return redirect()->route('librarian.back')->with(['success' => 'Berhasil Ditambah']);
     }
 
-    public function tolak($id){
+    public function decline($ids){
       $id = $this->getId();
-      $data = Peminjamans::find($id);
-      $data->status = "Ditolak";
-      $data->save();
-      return view('admin/back', compact('data','id'));
+      DB::table('peminjamans')->where('id',$ids)->update([
+          'status'=>"Ditolak",
+      ]);
+      return redirect()->route('librarian.back')->with(['success' => 'Berhasil Ditambah']);
     }
 
 }

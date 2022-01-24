@@ -48,9 +48,14 @@ class MemberController extends Controller
 
     public function borrowBook(){
         /*$id = auth()->user()->id;*/
-        $id = 356; 
+        $id = 356;
         $data = DB::table('peminjamans')->select('*')->where('peminjam',$id)->get();
         return view('borrow',compact('data'));
+    }
+
+    public function readBook($id){
+      $data = DB::table('books')->select('*')->where('id',$id)->get();
+      return view('readBook',compact('data'));
     }
 
 }

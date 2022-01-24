@@ -51,60 +51,10 @@
                     <td>{{ $dt->awal_peminjaman }}</td>
                     <td>{{ $dt->akhir_peminjaman }}</td>
                     <td>
-                      <a href="/librarian/accept/{{ $dt->id }}" class="btn btn-success" data-toggle="modal" data-target="#modal-hapus{{$dt->id}}"><i class="fas fa-check"></i> Terima</a>
-                      <a href="/librarian/decline/{{ $dt->id }}" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus{{$dt->id}}"><i class="fas fa-times"></i> Tidak</a>
+                      <a href="/librarian/accept/{{ $dt->id }}" class="btn btn-success"><i class="fas fa-check"></i> Terima</a>
+                      <a href="/librarian/decline/{{ $dt->id }}" class="btn btn-danger"><i class="fas fa-times"></i> Tidak</a>
                     </td>
                   </tr>
-
-      <div class="modal fade" id="modal-detail{{$dt->id}}">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Detail Buku</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">Nama Buku</label>
-                  <p>{{ $dt->nama_buku }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    Penulis
-                  </label>
-                  <p>{{ $dt->penulis }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    Penerbit
-                  </label>
-                  <p>{{ $dt->penerbit }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputBorderWidth2">
-                    Jumlah Halaman
-                  </label>
-                  <p>{{ $dt->jumlah_halaman }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="exampleSelectBorder">Ikhtisar</label>
-                  <p>{{ $dt->ikhtisar }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="exampleSelectBorder">Genre</label>
-                  <p>{{ $dt->Genre }}</p>
-                </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
           <div class="modal fade" id="modal-hapus{{$dt->id}}">
         <div class="modal-dialog">
           <div class="modal-content bg-warning">
@@ -115,7 +65,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>Anda yakin ingin <b>menghapus</b> {{ $dt->nama_buku }} dari daftar buku? Menghapus data buku ini tidak dapat dibatalkan</p>
+              <p>Anda yakin ingin menolak peminjaman ini?</p>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Batal</button>

@@ -1,19 +1,19 @@
 @extends('admin/template')
 @section('isi_halaman')
 <?php
- 
-$dataPoints = array( 
+
+$dataPoints = array(
   array("label"=>"Hadir", "y"=>50),
   array("label"=>"Tidak Hadir", "y"=>25),
   array("label"=>"Sakit", "y"=>25),
 )
- 
+
 ?>
 
 <script>
 window.onload = function() {
- 
- 
+
+
 var chart = new CanvasJS.Chart("chartContainer", {
   animationEnabled: true,
   data: [{
@@ -24,7 +24,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
   }]
 });
 chart.render();
- 
+
 }
 </script>
 
@@ -79,72 +79,14 @@ chart.render();
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Statistik Pribadi</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Ubah Password</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Ubah Password</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                          <center><h4>Statistik</h4></center>
-                      </div>
-                      <!-- /.user-block -->
-                      <div class="row mb-3">
-                        <div class="col-sm-6">
-                          <center><h5>Diagram Kehadiran Karyawan</h5></center>
-                          <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                        </div>
-                        <div class="col-sm-6">
-                  <center><h5>Tugas Terakhir</h5></center>
-                  <div class="table-responsive">
-                  <table class="table m-0">
-                    <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Tugas</th>
-                      <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-info">Processing</span></td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-                        </div>
-                      </div>
-                      <!-- /.row -->
-                    </div>
-                    <!-- /.post -->
-                  </div>
-                  <div class="tab-pane" id="settings">
-                    <form class="form-horizontal" method="post">
+                    <form class="form-horizontal" method="post" action="/admin/changePassword/{{ $dt->id_akun }}">
+                      @csrf
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
@@ -158,21 +100,15 @@ chart.render();
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Password Lama</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Password Lama">
-                        </div>
-                      </div>
-                      <div class="form-group row">
                         <label for="inputName2" class="col-sm-2 col-form-label">Password Baru</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Password Baru">
+                          <input type="password" class="form-control" id="inputName2" name="password" placeholder="Password Baru">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-2 col-form-label">Konfirmasi Password Baru</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Konfirmasi Password Baru">
+                          <input type="password" class="form-control" id="inputName2" name="Konfirmasi" placeholder="Konfirmasi Password Baru">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -181,6 +117,12 @@ chart.render();
                         </div>
                       </div>
                     </form>
+                </div>
+                        </div>
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                    <!-- /.post -->
                   </div>
                   <!-- /.tab-pane -->
                 </div>

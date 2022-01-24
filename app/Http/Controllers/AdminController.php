@@ -31,7 +31,27 @@ class AdminController extends Controller
     public function index()
     {
         $id = $this->getId();
-        return view('admin/admin',compact('id'));
+        $statistik1 = DB::table('books')->count();
+        $statistik2 = DB::table('member')->count();
+        $statistik3 = DB::table('peminjamans')->where('status','Diterima')->count();
+        $statistik4 = DB::table('karyawans')->count();
+        $statistik5 = DB::select("SELECT peminjamans.buku, count(peminjamans.buku) as jumlah_buku, books.nama_buku from peminjamans LEFT JOIN books on peminjamans.buku = books.id where peminjamans.status = 'Diterima' GROUP BY peminjamans.buku");
+        $statistik6 = DB::select("SELECT * FROM books order by created_at desc limit 5");
+        return view('admin/admin',compact('id','statistik1','statistik2','statistik3','statistik4', 'statistik5', 'statistik6'));
+    }
+
+    public function changePassword(Request $request, $id){
+      $isd = $this->getId();
+      $data = DB::table('karyawans')->join('users','karyawans.id_akun','=','users.id')->select('karyawans.id','karyawans.nama_karyawan','karyawans.jenis_kelamin','karyawans.tanggal_lahir','karyawans.alamat','karyawans.no_hp','karyawans.jabatan','karyawans.foto','users.email','karyawans.id_akun')->where('karyawans.id',$id)->get();
+      $datas = User::find($id);
+      $input = $request->all();
+
+      if($input['password'] == $input['Konfirmasi']){
+        $datas->password = Hash::make($input['password']);
+        return redirect()->route('admin.profile')->with(['success' => 'Berhasil Diubah']);
+      }else{
+        return redirect()->route('admin.profile')->with(['gagal' => 'Gagal Diubah']);
+      }
     }
 
     public function employee(){
@@ -57,7 +77,7 @@ class AdminController extends Controller
 
     public function profile($id){
         $id = $this->getId();
-         $data = DB::table('karyawans')->join('users','karyawans.id_akun','=','users.id')->select('karyawans.id','karyawans.nama_karyawan','karyawans.jenis_kelamin','karyawans.tanggal_lahir','karyawans.alamat','karyawans.no_hp','karyawans.jabatan','karyawans.foto','users.email')->where('karyawans.id',$id)->get();
+         $data = DB::table('karyawans')->join('users','karyawans.id_akun','=','users.id')->select('karyawans.id','karyawans.nama_karyawan','karyawans.jenis_kelamin','karyawans.tanggal_lahir','karyawans.alamat','karyawans.no_hp','karyawans.jabatan','karyawans.foto','users.email','karyawans.id_akun')->where('karyawans.id',$id)->get();
          return view('admin/profile',compact('data','id'));
     }
 

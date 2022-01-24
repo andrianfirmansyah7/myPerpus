@@ -14,7 +14,7 @@
     <title>MyPerpus</title>
 </head>
 <body>
-    
+
 <!-- header section starts  -->
 
 <header class="header">
@@ -25,9 +25,7 @@
 
         <div class="icons">
             <div id="search-btn" class="fas fa-search"></div>
-            <a href="#" class="fas fa-heart"></a>
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <div id="login-btn" class="fas fa-user"></div>
+            <div id="login-btn" class="fas fa-user"> Login</div>
         </div>
 
     </div>
@@ -64,7 +62,7 @@
         </div>
         <input type="submit" value="Sign In" class="btns">
         <p>forget password ? <a href="#">click here</a></p>
-        <p>don't have an account ? <a href="#">create one</a></p>
+        <p>don't have an account ? <a href="/register">create one</a></p>
     </form>
 
 </div>
@@ -226,7 +224,7 @@
             <a href="#"> <i class="fas fa-phone"></i> +621-529-2391 </a>
             <a href="#"> <i class="fas fa-envelope"></i> myPerpus@gmail.com </a>
         </div>
-        
+
     </div>
 
     <div class="share">

@@ -36,6 +36,7 @@ Route::get('admin/book', [AdminController::class, 'book'])->name('admin.book')->
 Route::get('admin/addBook', [AdminController::class, 'addBook'])->name('admin.addBook')->middleware('CheckRole');
 Route::post('admin/editBook/{id}', [AdminController::class, 'editBook'])->name('admin.editBook')->middleware('CheckRole');
 Route::get('admin/deleteBook/{id}', [AdminController::class, 'deleteBook'])->name('admin.deleteBook')->middleware('CheckRole');
+Route::post('admin/changePassword/{id}',[AdminController::class, 'changePassword'])->name('admin.changePassword')->middleware('CheckRole');
 
 Route::get('librarian', [AdminController::class, 'index'])->name('librarian.home')->middleware('CheckRole');
 Route::get('librarian/book', [LibrarianController::class, 'book'])->name('librarian.book')->middleware('CheckRole');
@@ -51,7 +52,10 @@ Route::get('librarian/profil/{id}', [AdminController::class, 'profile'])->name('
 Route::get('librarian/membership', [LibrarianController::class, 'membership'])->name('librarian.membership')->middleware('CheckRole');
 Route::get('librarian/borrow', [LibrarianController::class, 'borrow'])->name('librarian.borrow')->middleware('CheckRole');
 Route::get('librarian/back', [LibrarianController::class, 'back'])->name('librarian.back')->middleware('CheckRole');
+Route::get('librarian/accept/{id}', [LibrarianController::class, 'accept'])->name('librarian.accept')->middleware('CheckRole');
+Route::get('librarian/decline/{id}', [LibrarianController::class, 'decline'])->name('librarian.decline')->middleware('CheckRole');
 
 Route::get('home/detailBook/{id}', [MemberController::class, 'getBook'])->name('detailBuku');
 Route::post('member/pinjamBuku', [MemberController::class, 'pinjamBuku'])->name('pinjam');
 Route::get('member/borrowBook', [MemberController::class, 'borrowBook'])->name('member.borrowBook');
+Route::get('member/readBook/{id}', [MemberController::class, 'readBook'])->name('readBook');

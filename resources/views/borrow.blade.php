@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    
+
 <!-- header section starts  -->
 
 <header class="header">
@@ -29,54 +29,16 @@
         <a href="/" class="logo"> <i class="fas fa-book"></i> MyPerpus </a>
 
         <div class="icons">
-            <div id="search-btn" class="fas fa-search"></div>
-            <a href="#" class="fas fa-heart"></a>
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <div id="login-btn" class="fas fa-user"></div>
+          <a href="#" class="fas">myBooks</a>
+          <a href="#" class="fas">profile</a>
         </div>
 
-    </div>
-
-    <div class="header-2">
-        <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#featured">New Arrivals</a>
-            <a href="#arrivals">Books</a>
-        </nav>
     </div>
 
 </header>
 
-<!-- header section ends -->
-
-
-<!-- login form  -->
-
-<div class="login-form-container">
-
-    <div id="close-login-btn" class="fas fa-times"></div>
-
-    <form method="POST" action="{{ route('login') }}">
-      @csrf
-        <h3>Login</h3>
-        <span>Email</span>
-        <input type="email" name="email" class="box" placeholder="enter your email" id="">
-        <span>Password</span>
-        <input type="password" name="password" class="box" placeholder="enter your password" id="">
-        <div class="checkbox">
-            <input type="checkbox" name="" id="remember-me">
-            <label for="remember-me"> remember me</label>
-        </div>
-        <input type="submit" value="Sign In" class="btn">
-        <p>forget password ? <a href="#">click here</a></p>
-        <p>don't have an account ? <a href="#">create one</a></p>
-    </form>
-
-</div>
-
-<!-- home section starts  -->
     <div class="container">
-        <table class="table">
+        <table class="table" style="font-size:17px;margin-top:20px">
             <tr>
                 <th>No</th>
                 <th>Nama Buku</th>
@@ -92,18 +54,26 @@
                 <td>{{ $dt->awal_peminjaman }}</td>
                 <td>{{ $dt->akhir_peminjaman }}</td>
                 <td>
-                    <?php
-                    if($dt->status == "Belum ACC"){
-                    ?>
-                    <label class="btn btn-warning">{{ $dt->status }}</label>
-                <?php }else if($dt->status == "Peminjaman Diterima"){ ?>
-                    <a href="/member/readBook/{{ $dt->id }}">Baca Buku</a>
-                <?php } ?>    
+                <?php
+                $tgl = date('Y-m-d');
+                if(strtotime($tgl) <= strtotime($dt->akhir_peminjaman)){
+                if($dt->status == "Belum ACC"){ ?>
+                <label class="btn btn-warning">{{ $dt->status }}</label>
+                <?php }else if($dt->status == "Diterima"){ ?>
+                    <a href="/member/readBook/{{ $dt->buku }}" class="btn btn-success">Baca Buku</a>
+                <?php }else if($dt->status == "Ditolak"){ ?>
+                    <label class="btn btn-danger">{{ $dt->status }}</label>
+                <?php
+                }
+                }else{
+                ?>
+                <label class="btn btn-danger">Peminjaman Sudah Habis</label>
+              <?php } ?>
                 </td>
-            </tr>    
+            </tr>
 
         @empty
-        Kosong        
+        Kosong
         @endforelse
         </table>
         </div>
@@ -142,7 +112,7 @@
             <a href="#"> <i class="fas fa-phone"></i> +621-529-2391 </a>
             <a href="#"> <i class="fas fa-envelope"></i> myPerpus@gmail.com </a>
         </div>
-        
+
     </div>
 
     <div class="share">
